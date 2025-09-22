@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/dece/schedule_schema.v0.1.json",
+  "title": "DECE Combined Normative + Schedule Export",
+  "type": "object",
+  "required": ["meta", "normativa", "schedule"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["generated_at", "version", "schema_version", "schedule_integrity_hash", "normativa_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "generated_at": { "type": "string", "format": "date-time" },
+        "version": { "type": "integer", "minimum": 1 },
+        "schema_version": { "type": "string", "pattern": "^0\\.1$" },
+        "schedule_integrity_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "normativa_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "normativa": {
+      "type": "object",
+      "required": ["limite_examenes_por_dia", "ventana_diagnostica"],
+      "additionalProperties": true,
+      "properties": {
+        "limite_examenes_por_dia": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "ventana_diagnostica": {
+          "type": "object",
+            "required": ["inicio", "fin"],
+            "additionalProperties": false,
+            "properties": {
+              "inicio": { "type": "string", "format": "date" },
+              "fin": { "type": "string", "format": "date" }
+            }
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "required": ["version", "generated_at", "cursos"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "cursos": {
+          "type": "object",
+          "description": "Mapa de curso_key → array de entradas de examen",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["dia", "periodo", "materia", "docente"],
+              "additionalProperties": false,
+              "properties": {
+                "dia": { "type": "string", "enum": ["LUNES","MARTES","MIERCOLES","JUEVES","VIERNES"] },
+                "periodo": { "type": "string", "pattern": "^[IVXLC]+$" },
+                "materia": { "type": "string", "minLength": 1 },
+                "docente": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

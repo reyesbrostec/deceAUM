@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "generated_at": "2025-09-22T00:00:00.000Z",
+    "version": 1,
+    "schema_version": "0.1",
+    "schedule_integrity_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "normativa_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "normativa": {
+    "limite_examenes_por_dia": 3,
+    "ventana_diagnostica": { "inicio": "2025-03-03", "fin": "2025-03-14" }
+  },
+  "schedule": {
+    "version": 1,
+    "generated_at": "2025-09-22T00:00:00.000Z",
+    "cursos": {
+      "TERCERO_DE_BASICA": [
+        { "dia": "LUNES", "periodo": "I", "materia": "MATEMÁTICAS", "docente": "DOCENTE_X" },
+        { "dia": "MARTES", "periodo": "II", "materia": "LENGUA", "docente": "DOCENTE_Y" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+# --- Obsidian & sistema ---
+.obsidian/
+.obsidian-workspace
+.obsidian-workspace.json
+.obsidian.vimrc
+.trash/
+
+# Sistemas operativos
+Thumbs.db
+.DS_Store
+
+# Backups y temporales
+*.bak
+*.tmp
+~$*
+
+# Datos sensibles (no versionar)
+1 Calendario de atencion DECE/
+2 Procesos/Fichaje de estudiantes/
+data/fichaje_seguimiento_listado.csv
+data/calendar_creation_log.txt
+data/debug/
+
+# Exports internos que contengan datos reales (usar sample)
+# (permitir solo exports sanitizados en data/exports)
+!data/exports/
+
+data/migrations/
+
+# Archivos específicos potencialmente sensibles
+RESUMEN DECE.md
+LISTA DE ESTUDIANTE CON FICHA DECE.md
+Casos de Vulnerabilidad o Riesgo Psicosocial.md
+Desarrollo de adaptaciones por estudiante.md
+
+# Node / tooling (futuro)
+node_modules/
+package-lock.json
+
+# Python venv (si se crea)
+venv/
+.env
+
+# Sistemas de cache
+.cache/
