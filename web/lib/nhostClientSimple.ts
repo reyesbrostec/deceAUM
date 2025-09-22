@@ -11,7 +11,7 @@ interface ExamSchedule {
   materia: string;
   docente: string;
   fecha: string;
-  hora: string;
+  periodo: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -68,13 +68,13 @@ export async function listExams(): Promise<ExamSchedule[]> {
       body: JSON.stringify({
         query: `
           query ListExams {
-            exam_schedule(order_by: {fecha: asc, hora: asc}) {
+            exam_schedule(order_by: {fecha: asc, periodo: asc}) {
               id
               curso
               materia
               docente
               fecha
-              hora
+              periodo
               created_at
               updated_at
             }
@@ -114,7 +114,7 @@ export async function addExam(exam: Omit<ExamSchedule, 'id' | 'created_at' | 'up
               materia
               docente
               fecha
-              hora
+              periodo
               created_at
               updated_at
             }
@@ -187,7 +187,7 @@ export class NhostExamScheduleAPI {
       materia: exam.materia,
       docente: exam.docente,
       fecha: exam.fecha,
-      hora: exam.hora,
+      periodo: exam.periodo,
       dia: this.fechaToDia(exam.fecha),
       created_at: exam.created_at,
       updated_at: exam.updated_at
@@ -200,7 +200,7 @@ export class NhostExamScheduleAPI {
       materia: examAPI.materia,
       docente: examAPI.docente,
       fecha: examAPI.fecha,
-      hora: examAPI.hora
+      periodo: examAPI.periodo
     };
 
     return await addExam(examDB);
