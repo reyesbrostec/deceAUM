@@ -21,11 +21,10 @@ const defaultConfig: NhostConfig = {
   endpoint: process.env.NHOST_GRAPHQL_URL || '',
   headers: {
     'Content-Type': 'application/json',
-    // Agregar X-Hasura-Role si es necesario
-    ...(process.env.NHOST_ROLE && { 'X-Hasura-Role': process.env.NHOST_ROLE }),
-    ...(process.env.NHOST_ADMIN_SECRET && { 'X-Hasura-Admin-Secret': process.env.NHOST_ADMIN_SECRET })
+    // Usar x-nhost-admin-secret para Nhost v2+
+    ...(process.env.NHOST_ADMIN_SECRET && { 'x-nhost-admin-secret': process.env.NHOST_ADMIN_SECRET })
   },
-  debug: process.env.DEBUG_SCHEDULE === '1'
+  debug: process.env.DEBUG_SCHEDULE === '1' || process.env.NODE_ENV === 'development'
 };
 
 function log(message: string, data?: any) {
