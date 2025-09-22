@@ -16,24 +16,6 @@ function baseNormativa(){
 
 interface ExamRow { curso: string; fecha: string; periodo: string; materia: string; docente: string; docenteId?: string; dia: string; created_at: string; }
 
-"use client";
-import { canonicalSchedule, canonicalNormativa, sha256Hex } from '../../lib/hash';
-import { scheduleSchemaV02, ExportV02 } from '../../lib/schema_v0_2';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-// Página Admin completamente cliente: simplifica el build (evita mezclar server/client en el mismo archivo)
-export const dynamic = 'force-dynamic';
-
-function baseNormativa(){
-  return {
-    limite_examenes_por_dia: 3,
-    ventana_diagnostica: { inicio: '2025-09-17', fin: '2025-09-26' }
-  };
-}
-
-interface ExamRow { curso: string; fecha: string; periodo: string; materia: string; docente: string; docenteId?: string; dia: string; created_at: string; }
-
 export default function AdminPage(){
   const normativa = baseNormativa();
   const [items, setItems] = useState<ExamRow[]>([]);
