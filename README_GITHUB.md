@@ -87,16 +87,38 @@ node scripts/validate_export.js --file data/exports/export_2025-09-22_sample.jso
 
 Próximo (futuro): integrar AJV formal y cobertura de fechas en items.
 
-## �🧩 Próximos Pasos Inmediatos
+##  Próximos Pasos Inmediatos
+- Formal JSON Schema (`schedule_schema` v0.2)
+- AJV + validaciones fecha ventana
+- Campo `fecha` por examen y control de ventana
+- Import GraphQL real a Nhost (upsert + audit)
 
 ## 🛡 Consideraciones de Privacidad
+- No exponer datos sensibles de estudiantes en el repo público inicial.
+- Solo estructura y configuraciones normativas + plantillas.
 
-## 👥 Roles Previos
+## � Roles (Diseño Inicial Backend)
+Documento detallado: `docs/AUTH_AND_ROLES.md`
+
+Rol | Propósito
+----|----------
+admin | Superusuario (todas las operaciones)
+normative_admin | Gestiona normativa y eventos
+coordinator | Inserta/edita horario global
+dece_staff | Monitoreo carga, propone cambios limitados
+docente | Inserta exámenes de sus cursos/asignaturas
+viewer | Lectura pública
+import_bot | Importaciones CI (export validado)
+
+## �👥 Roles Previos (Contexto Operativo)
 Rol | Interacción
+----|------------
 Coordinación Académica | Revisión normativa y límite diarios.
 Docentes | Consumo UI web (posterior) para registrar exámenes.
 DECE | Monitoreo carga, cobertura diagnóstica.
 
 ## 📄 Licencia (Propuesta)
+- MIT para código, CC-BY documentación (sin datos reales)
 
+---
 _Archivo generado dentro del vault. Al crear el repo GitHub usar este README como base._
