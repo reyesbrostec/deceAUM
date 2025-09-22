@@ -1043,3 +1043,16 @@ Este patrón se implementó exitosamente en `Actividad docente segun horario.md`
 `commit: readme-github-bootstrap-2025-09-22`
 
 ---
+### 2025-09-22 - Implementación validador real + Workflow CI
+**Archivos creados:** `scripts/validate_export.js`, `.github/workflows/validate_export.yml`.
+**Funcionalidad:**
+- Valida estructura mínima (schema preliminar v0.1) y recalcula hashes deterministas.
+- Exit codes diferenciados (1 schema, 2 hash, 3 semántica, 4 uso) para gating en CI.
+- Opción `--fix` reescribe hashes correctos en export para limpieza de diffs.
+- Chequeo semántico inicial: límite de exámenes por día (errores / warnings).
+**CI:** Workflow ejecuta validación para cada export JSON modificado.
+**Actualizaciones README:** Sección CI agregada con instrucciones de uso local y pipeline.
+**Pendientes futuros:** Integrar AJV real, añadir validación fecha dentro de ventana diagnóstica, métricas de cobertura.
+`commit: validator-ci-initial-2025-09-22`
+
+---

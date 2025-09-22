@@ -75,7 +75,25 @@ Fase | Entrega | Estado
 4 | Sincronizador Obsidian ↔ Nhost | PENDIENTE
 5 | Observabilidad (métricas) | PENDIENTE
 
-## 🧩 Próximos Pasos Inmediatos
+## � CI: Validación Automática (GitHub Actions)
+Workflow: `.github/workflows/validate_export.yml`
+
+Ejecuta en cada push/PR que modifique exports o schema:
+1. Recorre `data/exports/*.json`
+2. Ejecuta `node scripts/validate_export.js --file <export>`
+3. Falla si:
+  - Esquema mínimo no cumple (exit 1)
+  - Hashes no coinciden (exit 2)
+  - Chequeos semánticos (densidad) fallan (exit 3)
+
+Actualizar hashes localmente tras editar manualmente un export:
+```bash
+node scripts/validate_export.js --file data/exports/export_2025-09-22_sample.json --fix
+```
+
+Próximo (futuro): integrar AJV formal y cobertura de fechas en items.
+
+## �🧩 Próximos Pasos Inmediatos
 - Formal JSON Schema (`schedule_schema` v0.2).
 - Generar `validate_export.js` con AJV.
 - Crear primera export `data/exports/`.

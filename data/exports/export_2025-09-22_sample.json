@@ -3,20 +3,33 @@
     "generated_at": "2025-09-22T00:00:00.000Z",
     "version": 1,
     "schema_version": "0.1",
-    "schedule_integrity_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "normativa_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    "schedule_integrity_hash": "418b658086aa7d6f4123af5975b2b6e0ea5298494680ba153e04559387e05c3f",
+    "normativa_hash": "dbd0934a8c69372c6ebaa2c99d629e77fd1a86ae60252bf07c15dd4b6f3d3fbf"
   },
   "normativa": {
     "limite_examenes_por_dia": 3,
-    "ventana_diagnostica": { "inicio": "2025-03-03", "fin": "2025-03-14" }
+    "ventana_diagnostica": {
+      "inicio": "2025-03-03",
+      "fin": "2025-03-14"
+    }
   },
   "schedule": {
     "version": 1,
     "generated_at": "2025-09-22T00:00:00.000Z",
     "cursos": {
       "TERCERO_DE_BASICA": [
-        { "dia": "LUNES", "periodo": "I", "materia": "MATEMÁTICAS", "docente": "DOCENTE_X" },
-        { "dia": "MARTES", "periodo": "II", "materia": "LENGUA", "docente": "DOCENTE_Y" }
+        {
+          "dia": "LUNES",
+          "periodo": "I",
+          "materia": "MATEMÁTICAS",
+          "docente": "DOCENTE_X"
+        },
+        {
+          "dia": "MARTES",
+          "periodo": "II",
+          "materia": "LENGUA",
+          "docente": "DOCENTE_Y"
+        }
       ]
     }
   }

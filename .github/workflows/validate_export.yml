@@ -1,0 +1,30 @@
+name: Validate Export
+on:
+  push:
+    paths:
+      - 'data/exports/*.json'
+      - 'Tecnico/Parametros/schedule_schema.v0.1.json'
+      - 'scripts/validate_export.js'
+      - 'README_GITHUB.md'
+  pull_request:
+    paths:
+      - 'data/exports/*.json'
+      - 'Tecnico/Parametros/schedule_schema.v0.1.json'
+      - 'scripts/validate_export.js'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate each export
+        run: |
+          set -e
+          for f in data/exports/*.json; do
+            echo "Validating $f";
+            node scripts/validate_export.js --file "$f";
+          done
