@@ -53,21 +53,15 @@ El botón `Export Combo` produce estructura JSON:
 
 ## 🌐 Migración a Nhost (Plan)
 Entidad | Campos núcleo
---------|---------------
 `exam_schedule` | id, curso_key, dia, periodo, materia, docente_id, created_at, updated_at
 `normative_item` | id, categoria, estado, param_value (jsonb), hash, effective_from
 `normative_event` | id, normative_id, action, timestamp, actor
 
 ## 🧪 Validación (Node + AJV) Futuro
 Archivo: `scripts/validate_export.js` (no creado aún) hará:
-- Cargar JSON exportado.
-- Validar schema.
-- Verificar hashes.
-- Emitir warnings densidad y cobertura.
 
 ## 🚀 Roadmap Resumido
 Fase | Entrega | Estado
------|---------|-------
 0 | Vault Obsidian con export + hash | COMPLETADO (base)
 1 | Repo GitHub + CI (schema + hash) | PENDIENTE
 2 | Nhost GraphQL (persistencia) | PENDIENTE
@@ -94,24 +88,15 @@ node scripts/validate_export.js --file data/exports/export_2025-09-22_sample.jso
 Próximo (futuro): integrar AJV formal y cobertura de fechas en items.
 
 ## �🧩 Próximos Pasos Inmediatos
-- Formal JSON Schema (`schedule_schema` v0.2).
-- Generar `validate_export.js` con AJV.
-- Crear primera export `data/exports/`.
-- Inicializar repositorio GitHub y subir subset público.
 
 ## 🛡 Consideraciones de Privacidad
-- No exponer datos sensibles de estudiantes en el repo público inicial.
-- Solo estructura y configuraciones normativas + plantillas.
 
 ## 👥 Roles Previos
 Rol | Interacción
-----|------------
 Coordinación Académica | Revisión normativa y límite diarios.
 Docentes | Consumo UI web (posterior) para registrar exámenes.
 DECE | Monitoreo carga, cobertura diagnóstica.
 
 ## 📄 Licencia (Propuesta)
-- MIT para código, CC-BY para documentación, restringir datos reales (separar sample).
 
----
 _Archivo generado dentro del vault. Al crear el repo GitHub usar este README como base._

@@ -1,0 +1,15 @@
+# Nhost local config (placeholder)
+version: "1"
+services:
+  hasura:
+    adminSecret: ${HASURA_GRAPHQL_ADMIN_SECRET}
+    graphqlUrl: http://localhost:1337/v1/graphql
+    consolePort: 9695
+  postgres:
+    port: 5432
+  auth:
+    jwtSecret: ${NHOST_JWT_SECRET}
+    clientUrl: http://localhost:1337/v1/auth
+
+metadata:
+  enabled: true
