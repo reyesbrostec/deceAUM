@@ -1,10 +1,10 @@
+"use client";
 import { canonicalSchedule, canonicalNormativa, sha256Hex } from '../../lib/hash';
 import { scheduleSchemaV02, ExportV02 } from '../../lib/schema_v0_2';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-// Nota: Esta página asume runtime server components; extraer datos del endpoint en el cliente podría ser preferible luego.
-// Para simplicidad, implementamos un pequeño fetch en cliente.
-
+// Página Admin completamente cliente: simplifica el build (evita mezclar server/client en el mismo archivo)
 export const dynamic = 'force-dynamic';
 
 function baseNormativa(){
@@ -14,24 +14,28 @@ function baseNormativa(){
   };
 }
 
-export default function AdminPage(){
-  return (
-    <div className="space-y-6">
-      <div className="flex gap-4 items-center">
-        <h1 className="text-xl font-semibold">Admin</h1>
-        <Link href="/captura" className="text-sm text-indigo-600 hover:underline">Volver a captura</Link>
-      </div>
-      <ClientAdmin normativa={baseNormativa()} />
-    </div>
-  );
-}
+interface ExamRow { curso: string; fecha: string; periodo: string; materia: string; docente: string; docenteId?: string; dia: string; created_at: string; }
 
-'use client';
+"use client";
+import { canonicalSchedule, canonicalNormativa, sha256Hex } from '../../lib/hash';
+import { scheduleSchemaV02, ExportV02 } from '../../lib/schema_v0_2';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+// Página Admin completamente cliente: simplifica el build (evita mezclar server/client en el mismo archivo)
+export const dynamic = 'force-dynamic';
+
+function baseNormativa(){
+  return {
+    limite_examenes_por_dia: 3,
+    ventana_diagnostica: { inicio: '2025-09-17', fin: '2025-09-26' }
+  };
+}
 
 interface ExamRow { curso: string; fecha: string; periodo: string; materia: string; docente: string; docenteId?: string; dia: string; created_at: string; }
 
-function ClientAdmin({ normativa }: { normativa: any }){
+export default function AdminPage(){
+  const normativa = baseNormativa();
   const [items, setItems] = useState<ExamRow[]>([]);
   const [exportJson, setExportJson] = useState<string>('');
   const [hashes, setHashes] = useState<{schedule?:string; normativa?:string}>({});
@@ -87,9 +91,15 @@ function ClientAdmin({ normativa }: { normativa: any }){
 
   return (
     <div className="space-y-8">
+      <div className="flex gap-4 items-center">
+        <h1 className="text-xl font-semibold">Admin</h1>
+        <Link href="/captura" className="text-sm text-indigo-600 hover:underline">Volver a captura</Link>
+        <button onClick={load} className="px-3 py-1 text-sm bg-slate-200 rounded">Refrescar</button>
+        <button onClick={buildExport} className="px-3 py-1 text-sm bg-indigo-600 text-white rounded">Generar Export</button>
+        <button onClick={download} disabled={!exportJson} className="px-3 py-1 text-sm bg-slate-600 text-white rounded disabled:opacity-40">Descargar</button>
+      </div>
       <section className="space-y-2">
         <h2 className="font-medium">Registros actuales ({items.length})</h2>
-        <button onClick={load} className="px-3 py-1 text-sm bg-slate-200 rounded">Refrescar</button>
         <div className="overflow-x-auto">
           <table className="text-sm border min-w-full">
             <thead className="bg-slate-100">
@@ -119,11 +129,7 @@ function ClientAdmin({ normativa }: { normativa: any }){
         </div>
       </section>
       <section className="space-y-4">
-        <div className="flex items-center gap-4">
-          <h2 className="font-medium">Exportar</h2>
-          <button onClick={buildExport} className="px-4 py-2 bg-indigo-600 text-white rounded">Generar</button>
-          <button onClick={download} disabled={!exportJson} className="px-4 py-2 bg-slate-600 text-white rounded disabled:opacity-40">Descargar</button>
-        </div>
+        <h2 className="font-medium">Exportar</h2>
         {hashes.schedule && (
           <div className="text-xs text-slate-600 space-y-1">
             <p><strong>schedule_hash:</strong> {hashes.schedule}</p>
